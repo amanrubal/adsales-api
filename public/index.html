@@ -27,244 +27,171 @@
             http.send(params);
         }
 
-        function releaseInventory() {
-            var spots = [];
-
-            var spot1 = {
-                adspotId: "1",
-                programName: "Massive Crime Wave",
-                seasonEpisode: "s13e1",
-                genre: "Drama",
-                dayPart: "Prime Monday",
-                targetGrp: "3.3",
-                targetDemographics: "Men 12 - 55",
-                initialCpm: "3.44",
-                bsrp: "1300.6",
-                numberOfSpots: "2",
-                numberReservedSpots: "2"
-            };
-
-            spots.push(JSON.stringify(spot1));
-
-            var spot2 = {
-                adspotId: "2",
-                programName: "Cars",
-                seasonEpisode: "s13e2",
-                genre: "Action",
-                dayPart: "Prime Tuesday",
-                targetGrp: "1.3",
-                targetDemographics: "Men 20 - 40",
-                initialCpm: "3.34",
-                bsrp: "100.6",
-                numberOfSpots: "2",
-                numberReservedSpots: "2"
-            };
-
-            spots.push(JSON.stringify(spot2));
+        function discoverRP() {
+      
 
             var data = {
-                "broadcasterId": "BroadcasterA",
-                "lotId": "1000",
-                "spots": spots
+                "key": "rs2",
+                "sp": "XYZ",
+                "loc": "Barcelona",
+                "lat": "41.385064",
+                "long": "2.173403"
             };
-            callServer("releaseInventory", data);
+            callServer("discoverRP", data);
         }
 
-        function queryPlaceOrders() {
-            var data = { "agencyId": "AgencyA", "broadcasterId": "BroadcasterA" };
-            callServer("queryPlaceOrders", data);
-        }
-
-        function placeOrders() {
-            var spots = [];
-
-            var spot1 = {
-                lotId: "1000",
-                adspotId: "1",
-                orderNumber: "1",
-                advertiserId: "AdvertiserA",
-                adContractId: "1",
-                numberOfSpots: "2",
-            };
-
-            spots.push(JSON.stringify(spot1));
-
-            var spot2 = {
-                lotId: "1000",
-                adspotId: "2",
-                orderNumber: "1",
-                advertiserId: "AdvertiserC",
-                adContractId: "1",
-                numberOfSpots: "1",
-            };
-
-            spots.push(JSON.stringify(spot2));
+        function enterData() {
+      
 
             var data = {
-                "agencyId": "AgencyA",
-                "broadcasterId": "BroadcasterA",
-                "spots": spots
+                "key":"rs8",
+                "msisdn":"14691234568", 
+                "name":"A",
+                "address":"DALLAS",
+                "ho":"ABC",
+                "lat":"32.942746",
+                "long":"-96.994838"
             };
-            callServer("placeOrders", data);
+            callServer("enterData", data);
         }
 
-        function queryAdspotsToMap() {
+        function authentication() {
+      
             var data = {
-                "agencyId": "AgencyA",
+                "key": "rs2"
             };
-            callServer("queryAdspotsToMap", data);
+            callServer("authentication", data);
         }
 
-        function mapAdspots() {
-            var spots = [];
-
-            var spot1 = { uniqueAdspotId: "1000_1", campainName: "IPA" };
-            spots.push(JSON.stringify(spot1));
-
-            var spot2 = { uniqueAdspotId: "1000_2", campainName: "Family Sedan" };
-            spots.push(JSON.stringify(spot2));
-
-            var spot3 = { uniqueAdspotId: "1000_5", campainName: "Great Soap" };
-
-            spots.push(JSON.stringify(spot3));
-
+        function updateRates() {
             var data = {
-                "agencyId": "AgencyA",
-                "broadcasterId": "BroadcasterA",
-                "spots": spots
+                "key": "rs2"
             };
-            callServer("mapAdspots", data);
+            callServer("updateRates", data);
         }
 
-        function queryAsRun() {
-            var data = { "broadcasterId": "BroadcasterA" };
-            callServer("queryAsRun", data);
+        function CallOut() {
+           var data = {
+                "key": "rs2",
+                "destmsisdn": "14691234569",
+            };
+            callServer("CallOut", data);
         }
 
-        function reportAsRun() {
-            var spots = [];
-
-            var spot1 = {
-                "uniqueAdspotId": "1000_1",
-                "actualGrp": "3.3",
-                "actualProgramName": "Crime Wave",
-                "actualDemographics": "Men 12 - 55",
-                "makupAdspotId": "1000_3"
+         function resetInventory() {
+           var data = {
             };
-            spots.push(JSON.stringify(spot1));
+            callServer("resetInventory", data);
+        }
 
-            var spot2 = {
-                "uniqueAdspotId": "1000_5",
-                "actualGrp": "3.3",
-                "actualProgramName": "Weather Event",
-                "actualDemographics": "Men 12 - 55",
-                "makupAdspotId": "1000_7"
-            };
-
-
+        function CallEnd() {
+      
             var data = {
-                "broadcasterId": "BroadcasterA",
-                "spots": spots
+                "key": "rs2"
             };
-            callServer("reportAsRun", data);
+            callServer("CallEnd", data);
         }
 
-        function queryTraceAdSpots(uid) {
-            var data = { "userId": uid };
-            callServer("queryTraceAdSpots", data);
+        function CallPay() {
+      
+            var data = {
+                "key": "rs2"
+            };
+            callServer("CallPay", data);
         }
+
+         function Overage() {
+      
+            var data = {
+                "key": "rs2"
+            };
+            callServer("Overage", data);
+        }
+
+        function queryMSISDN() {
+            var data = { "key": "rs2"};
+            callServer("queryMSISDN", data);
+        }
+        function delayFunc() {
+            var data={};
+            callServer("delayFunc");
+        }
+
+     
     </script>
 </head>
 
 <body>
-    <h2>Release Inventory</h2>
-    <form method="post" action="/releaseInventoryOLD">
-        Broadcaster Id: <input name="broadcasterId" value="BroadcasterA" /> <br> Lot Id: <input name="lotId" value="1000"
-        /><br>
-        <table>
-            <tr>
-                <td><input name="adspotId" value="1" /></td>
-                <td><input name="programName" value="Dance Competition" /></td>
-                <td><input name="seasonEpisode" value="S13E1" /></td>
-                <td><input name="genre" value="Reality" /></td>
-                <td><input name="dayPart" value="Prime Mon" /></td>
-                <td><input name="targetGrp" value="2.4" /></td>
-                <td><input name="targetDemographics" value="Women 18 - 54" /></td>
-                <td><input name="initialCpm" value="1.25" /></td>
-                <td><input name="bsrp" value="355.2" /></td>
-                <td><input name="numberOfSpots" value="6" /></td>
-            </tr>
-            <tr>
-                <td><input name="adspotId" value="2" /></td>
-                <td><input name="programName" value="Urban Family" /></td>
-                <td><input name="seasonEpisode" value="S05E1" /></td>
-                <td><input name="genre" value="Sitcom" /></td>
-                <td><input name="dayPart" value="Prime Thur" /></td>
-                <td><input name="targetGrp" value="1.7" /></td>
-                <td><input name="targetDemographics" value="Women 18 - 54" /></td>
-                <td><input name="initialCpm" value="1" /></td>
-                <td><input name="bsrp" value="201.28" /></td>
-                <td><input name="numberOfSpots" value="6" /></td>
-            </tr>
-        </table>
-        <input type="submit" value="Submit" />
-    </form>
-
-    <h2>Query Place Orders</h2>
-    <form method="post" action="/queryPlaceOrdersOLD">
-        <table>
-            <tr>
-                <td>Agency Id: <input name="agencyId" value="AgencyA" /></td>
-                <td>Broadcaster Id: <input name="broadcasterId" value="BroadcasterA" /></td>
-            </tr>
-        </table>
-        <input type="submit" value="Submit" />
-    </form>
+  
 
     <table border=1>
         <tr>
-            <td valign=top> <input type="button" value="Release Inventory" onclick="releaseInventory();" /></td>
+            <td valign=top> <input type="button" value="Discover RP" onclick="discoverRP();" /></td>
             <td>
-                <div id="releaseInventory"></div>
+                <div id="discoverRP"></div>
             </td>
         </tr>
         <tr>
-            <td valign=top><input type="button" value="Query Place Orders" onclick="queryPlaceOrders();" /></td>
+            <td valign=top><input type="button" value="Authentication" onclick="authentication();" /></td>
             <td>
-                <div id="queryPlaceOrders"></div>
+                <div id="authentication"></div>
             </td>
         </tr>
         <tr>
-            <td valign=top><input type="button" value="Place Orders" onclick="placeOrders();" /></td>
+            <td valign=top><input type="button" value="Update Rates" onclick="updateRates();" /></td>
             <td>
-                <div id="placeOrders"></div>
+                <div id="updateRates"></div>
             </td>
         </tr>
         <tr>
-            <td valign=top><input type="button" value="Query Adspots To Map" onclick="queryAdspotsToMap();" /></td>
+            <td valign=top><input type="button" value="Call Out" onclick="CallOut();" /></td>
             <td>
-                <div id="queryAdspotsToMap"></div>
+                <div id="CallOut"></div>
             </td>
         </tr>
         <tr>
-            <td valign=top><input type="button" value="Map Ad Spots" onclick="mapAdspots();" /></td>
+            <td valign=top><input type="button" value="Call End" onclick="CallEnd();" /></td>
             <td>
-                <div id="mapAdspots"></div>
+                <div id="CallEnd"></div>
             </td>
         </tr>
         <tr>
-            <td valign=top><input type="button" value="Query As Run" onclick="queryAsRun();" /></td>
+            <td valign=top><input type="button" value="Call Pay" onclick="CallPay();" /></td>
             <td>
-                <div id="queryAsRun"></div>
+                <div id="CallPay"></div>
             </td>
         </tr>
         <tr>
-            <td valign=top><input type="button" value="Report As Run" onclick="reportAsRun();" /></td>
+            <td valign=top><input type="button" value="Overage" onclick="Overage();" /></td>
             <td>
-                <div id="reportAsRun"></div>
+                <div id="Overage"></div>
             </td>
         </tr>
         <tr>
+            <td valign=top><input type="button" value="Query MSISDN" onclick="queryMSISDN();" /></td>
+            <td>
+                <div id="queryMSISDN"></div>
+            </td>
+        </tr>
+        <tr>
+            <td valign=top><input type="button" value="reset Inventory" onclick="resetInventory();" /></td>
+            <td>
+                <div id="resetInventory"></div>
+            </td>
+        </tr>
+       <tr>
+            <td valign=top><input type="button" value="Add User" onclick="enterData();" /></td>
+            <td>
+                <div id="enterData"></div>
+            </td>
+        </tr>
+        <tr>
+            <td valign=top><input type="button" value="Test Delay" onclick="delayFunc();" /></td>
+            <td>
+                <div id="delayFunc"></div>
+            </td>
+        </tr>
+       <!-- <tr>
             <td valign=top><input type="button" value="Query TraceAdSpots: BroadcasterA" onclick="queryTraceAdSpots('BroadcasterA');" /><br>
                 <input type="button" value="Query TraceAdSpots: Agency A" onclick="queryTraceAdSpots('AgencyA');" /><br>
                 <input type="button" value="Query TraceAdSpots: Advertiser A" onclick="queryTraceAdSpots('AdvertiserA');" /><br>
@@ -273,7 +200,7 @@
             <td>
                 <div id="queryTraceAdSpots"></div>
             </td>
-        </tr>
+        </tr>-->
     </table>
 </body>
 

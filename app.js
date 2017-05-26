@@ -87,185 +87,156 @@ app.get('/', function (req, res) {
     });
 });
 
-app.post('/releaseInventory', function (req, res) {
-    console.log("In ReleaseInventory!!");
+
+app.post('/queryMSISDN', function (req, res) {
+    console.log("In queryMSISDN!!");
     console.log("Input Params: " + JSON.stringify(req.body));
     var data = JSON.parse(req.body.data);
-
     var params = new Array();
-    params.push(data.broadcasterId);
-    params.push(data.lotId);
+    params.push(data.key);
 
-    console.log("ad spot data: " + data.spots);
-    var spotData = data.spots;
-    for (var i = 0; i < spotData.length; i++) {
-        var adspotData = spotData[i];
-        params.push(adspotData);
-        console.log(i + ") Adspot Data: " + adspotData);
-    }
-
-    cpChaincode.releaseInventory(defaultDemoUser, params, function (e, data) {
+    cpChaincode.queryMSISDN(defaultDemoUser, params, function (e, data) {
         cb_received_response(e, data, res);
     });
 });
 
-app.post('/releaseInventoryOLD', function (req, res) {
-    console.log("In ReleaseInventory OLD!!");
-    console.log("Input Params: " + JSON.stringify(req.body));
-
-    var params = new Array();
-    params.push(req.body.broadcasterId);
-    params.push(req.body.lotId);
-
-    for (var i = 0; i < req.body.adspotId.length; i++) {
-        var adspotData = {};
-        adspotData.adspotId = req.body.adspotId[i];
-        adspotData.programName = req.body.programName[i];
-        adspotData.seasonEpisode = req.body.seasonEpisode[i];
-        adspotData.genre = req.body.genre[i];
-        adspotData.dayPart = req.body.dayPart[i];
-        adspotData.targetGrp = req.body.targetGrp[i];
-        adspotData.targetDemographics = req.body.targetDemographics[i];
-        adspotData.initialCpm = req.body.initialCpm[i];
-        adspotData.bsrp = req.body.bsrp[i];
-        adspotData.numberOfSpots = req.body.numberOfSpots[i];
-        params.push(JSON.stringify(adspotData));
-        console.log("Adspot Data: " + JSON.stringify(adspotData));
-    }
-    //console.log(data);
-    cpChaincode.releaseInventory(defaultDemoUser, params, function (e, data) {
-        cb_received_response(e, data, res);
-    });
-});
-
-app.post('/queryPlaceOrders', function (req, res) {
-    console.log("In queryPlaceOrders!!");
+app.post('/enterData', function (req, res) {
+    console.log("In enterData!!");
     console.log("Input Params: " + JSON.stringify(req.body));
 
     var data = JSON.parse(req.body.data);
     var params = new Array();
-    params.push(data.agencyId);
-    params.push(data.broadcasterId);
+    params.push(data.key);
+    params.push(data.msisdn);
+    params.push(data.name);
+    params.push(data.address);
+    params.push(data.ho);
+    params.push(data.lat);
+    params.push(data.long);
 
-    cpChaincode.queryPlaceOrders(defaultDemoUser, params, function (e, data) {
+    cpChaincode.enterData(defaultDemoUser, params, function (e, data) {
         cb_received_response(e, data, res);
     });
 });
 
-app.post('/queryPlaceOrdersOLD', function (req, res) {
-    console.log("In queryPlaceOrders OLD!!");
-    console.log("Input Params: " + JSON.stringify(req.body));
-
-    var params = new Array();
-    params.push(req.body.agencyId);
-    params.push(req.body.broadcasterId);
-
-    cpChaincode.queryPlaceOrders(defaultDemoUser, params, function (e, data) {
-        cb_received_response(e, data, res);
-    });
-});
-
-app.post('/placeOrders', function (req, res) {
-    console.log("In PlaceOrders!!");
+app.post('/discoverRP', function (req, res) {
+    console.log("In discoverRP!!");
     console.log("Input Params: " + JSON.stringify(req.body));
 
     var data = JSON.parse(req.body.data);
     var params = new Array();
-    params.push(data.agencyId);
-    params.push(data.broadcasterId);
+    params.push(data.key);
+    params.push(data.sp);
+    params.push(data.loc);
+    params.push(data.lat);
+    params.push(data.long);
 
-    console.log("ad spot data: " + data.spots);
-    var spotData = data.spots;
-    for (var i = 0; i < spotData.length; i++) {
-        var adspotData = spotData[i];
-        params.push(adspotData);
-        console.log(i + ") Adspot Data: " + adspotData);
-    }
-
-    cpChaincode.placeOrders(defaultDemoUser, params, function (e, data) {
+    cpChaincode.discoverRP(defaultDemoUser, params, function (e, data) {
         cb_received_response(e, data, res);
     });
 });
 
-app.post('/queryAdspotsToMap', function (req, res) {
-    console.log("In queryAdspotsToMap!!");
+app.post('/authentication', function (req, res) {
+    console.log("In authentication!!");
     console.log("Input Params: " + JSON.stringify(req.body));
 
     var data = JSON.parse(req.body.data);
     var params = new Array();
-    params.push(data.agencyId);
+    params.push(data.key);
 
-    cpChaincode.queryAdspotsToMap(defaultDemoUser, params, function (e, data) {
+    cpChaincode.authentication(defaultDemoUser, params, function (e, data) {
         cb_received_response(e, data, res);
     });
 });
 
-app.post('/mapAdspots', function (req, res) {
-    console.log("In mapAdspots!!");
+
+app.post('/updateRates', function (req, res) {
+    console.log("In updateRates!!");
     console.log("Input Params: " + JSON.stringify(req.body));
 
     var data = JSON.parse(req.body.data);
     var params = new Array();
-    params.push(data.agencyId);
+    params.push(data.key);
 
-    console.log("ad spot data: " + data.spots);
-    var spotData = data.spots;
-    for (var i = 0; i < spotData.length; i++) {
-        var adspotData = spotData[i];
-        params.push(adspotData);
-        console.log(i + ") Adspot Data: " + adspotData);
-    }
-
-    cpChaincode.mapAdspots(defaultDemoUser, params, function (e, data) {
+    cpChaincode.updateRates(defaultDemoUser, params, function (e, data) {
         cb_received_response(e, data, res);
     });
 });
 
-app.post('/queryAsRun', function (req, res) {
-    console.log("In queryAsRun!!");
+
+app.post('/CallOut', function (req, res) {
+    console.log("In CallOut!!");
     console.log("Input Params: " + JSON.stringify(req.body));
 
     var data = JSON.parse(req.body.data);
     var params = new Array();
-    params.push(data.broadcasterId);
+    params.push(data.key);
+    params.push(data.destmsisdn);
 
-    cpChaincode.queryAsRun(defaultDemoUser, params, function (e, data) {
+    cpChaincode.CallOut(defaultDemoUser, params, function (e, data) {
         cb_received_response(e, data, res);
     });
 });
 
-app.post('/reportAsRun', function (req, res) {
-    console.log("In reportAsRun!!");
+app.post('/CallEnd', function (req, res) {
+    console.log("In CallEnd!!");
     console.log("Input Params: " + JSON.stringify(req.body));
 
     var data = JSON.parse(req.body.data);
     var params = new Array();
-    params.push(data.broadcasterId);
+    params.push(data.key);
 
-    console.log("ad spot data: " + data.spots);
-    var spotData = data.spots;
-    for (var i = 0; i < spotData.length; i++) {
-        var adspotData = spotData[i];
-        params.push(adspotData);
-        console.log(i + ") Adspot Data: " + adspotData);
-    }
-
-    cpChaincode.reportAsRun(defaultDemoUser, params, function (e, data) {
+    cpChaincode.CallEnd(defaultDemoUser, params, function (e, data) {
         cb_received_response(e, data, res);
     });
 });
 
-app.post('/queryTraceAdSpots', function (req, res) {
-    console.log("In queryTraceAdSpots!!");
+
+app.post('/CallPay', function (req, res) {
+    console.log("In CallPay!!");
     console.log("Input Params: " + JSON.stringify(req.body));
 
     var data = JSON.parse(req.body.data);
     var params = new Array();
-    params.push(data.userId);
+    params.push(data.key);
 
-    cpChaincode.queryTraceAdSpots(defaultDemoUser, params, function (e, data) {
+    cpChaincode.CallPay(defaultDemoUser, params, function (e, data) {
         cb_received_response(e, data, res);
     });
+});
+
+
+app.post('/Overage', function (req, res) {
+    console.log("In Overage!!");
+    console.log("Input Params: " + JSON.stringify(req.body));
+
+    var data = JSON.parse(req.body.data);
+    var params = new Array();
+    params.push(data.key);
+
+    cpChaincode.Overage(defaultDemoUser, params, function (e, data) {
+        cb_received_response(e, data, res);
+    });
+});
+
+
+app.post('/resetInventory', function (req, res) {
+    console.log("In resetInventory!!");
+    console.log("Input Params: " + JSON.stringify(req.body));
+
+    var data = JSON.parse(req.body.data);
+    var params = new Array();
+ 
+
+    cpChaincode.resetInventory(defaultDemoUser, params, function (e, data) {
+        cb_received_response(e, data, res);
+    });
+});
+
+app.post('/delayFunc', function (req, res) {
+    
+  setTimeout(function(){res.send("Test")},3000)
+  //res.send("Test")
 });
 
 // Get a single participant's account information
@@ -279,6 +250,11 @@ app.get('/getBlockchainRecord', function (req, res) {
         cb_received_response(e, data, res);
     });
 });
+
+function blankFunc(res)
+{
+  res.send("Test");
+}
 
 function cb_received_response(e, data, res) {
     if (e != null) {

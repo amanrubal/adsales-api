@@ -1,7 +1,7 @@
 {
-  "name": "adsales-api",
+  "name": "bctelco-api",
   "version": "0.0.1",
-  "description": "An example commercial paper trading application built on a blockchain.",
+  "description": "Telco Roaming Use Cases",
   "main": "app.js",
   "scripts": {
     "start": "node app.js"
